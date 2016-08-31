@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">WalkApp</string>
+
+    <string name="facebook_app_id">1774135542861384</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="cancel_login">Se canceló el inicio de sesión</string>
+    <string name="error_login">Ocurrió un error al ingresar</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="welcome">Felicidades, está logueado</string>
+    <string name="no_tienes_una_cuenta">¿No tienes una cuenta?</string>
+    <string name="user">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="errorUser">Debe ingresar un usuario.</string>
+    <string name="errorPassword">Debe ingresar una contraseña</string>
+    <string name="emptyFields">Ha dejado campos obligatorios vacios.</string>
+    <string name="wrongUserPass">Usuario o contraseña incorrectos</string>
+    <string name="title_activity_ruta_seleccionada">Ruta</string>
+</resources>
