@@ -9,7 +9,7 @@
     <string name="cancel_login">Se canceló el inicio de sesión</string>
     <string name="error_login">Ocurrió un error al ingresar</string>
     <string name="logout">Cerrar sesión</string>
-    <string name="welcome">Felicidades, está logueado</string>
+    <string name="welcome">¡Hola, usuario!</string>
     <string name="no_tienes_una_cuenta">¿No tienes una cuenta?</string>
     <string name="user">Usuario</string>
     <string name="password">Contraseña</string>

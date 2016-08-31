@@ -3,10 +3,7 @@ package co.edu.udea.compumovil.gr01.walkapp;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -36,23 +33,30 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private EditText et_user;
     private EditText et_password;
+    private int tipoLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //Campos de texto para logueo normal
         et_user = (EditText) findViewById(R.id.et_user);
         et_password = (EditText) findViewById(R.id.et_password);
 
+        //Se inicializa el FacebookSDK
         FacebookSdk.sdkInitialize(getApplicationContext());
-
         callbackManager =  CallbackManager.Factory.create();
 
+        //Acciones a ejecutar cuando se presiona el boton de Facebook
         loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            //En caso de que el logueo sea exitoso
             @Override
             public void onSuccess(LoginResult loginResult) {
                 System.out.println("onSuccess");
+                tipoLogin = 1;
+
                 progressDialog = new ProgressDialog(LoginActivity.this);
                 progressDialog.setMessage("Procesando datos...");
                 progressDialog.show();
@@ -64,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         Log.i("LoginActivity", response.toString());
-                        // Get facebook data from login
+                        // Se consiguen los datos de facebook de quien se logueo
                         Bundle bFacebookData = getFacebookData(object);
                     }
                 });
@@ -75,38 +79,28 @@ public class LoginActivity extends AppCompatActivity {
 
 
                 //requestUserProfile(loginResult);
+                //Se redirige a la pantalla principal
                 goMainScreen();
             }
-
+            //En caso de que el logueo se cancele por fallos en la conexion a internet o cerrar la aplicacion
             @Override
             public void onCancel() {
                 Toast.makeText(getApplicationContext(), R.string.cancel_login, Toast.LENGTH_SHORT).show();
             }
-
+            //En caso de que haya algun error en el proceso logueo
             @Override
             public void onError(FacebookException error) {
                 Toast.makeText(getApplicationContext(), R.string.error_login, Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
-    private void goMainScreen() {
-        Intent intent = new Intent(this,MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-    }
-
+    //Pide los permisos para acceso a los datos si se logueo con facebook
     public void loginFacebook(View view){
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "email"));
     }
 
+    //Extrae los datos del usuario Facebook que ingreso a la aplicación
     private Bundle getFacebookData(JSONObject object) {
 
         try {
@@ -144,6 +138,21 @@ public class LoginActivity extends AppCompatActivity {
         return null;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    //En caso de loguearse correctamente se abre la actividad principal
+    private void goMainScreen() {
+        Intent intent = new Intent(this,MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("tipoLogin", tipoLogin);
+        startActivity(intent);
+    }
+
+    //Login con usuario y cuenta normales
     public void normalLogin(View view) {
 
         if(et_user.getText().toString().equals("")){
@@ -151,22 +160,24 @@ public class LoginActivity extends AppCompatActivity {
                 et_user.requestFocus();
                 et_user.setError(getString(R.string.errorUser));
                 et_password.setError(getString(R.string.errorPassword));
-                mensajeError();
+                errorMessage();
                 return;
             }else{
                 et_user.requestFocus();
                 et_user.setError(getString(R.string.errorUser));
-                mensajeError();
+                errorMessage();
                 return;
             }
         }else if(et_password.getText().toString().equals("")){
             et_password.requestFocus();
             et_password.setError(getString(R.string.errorPassword));
-            mensajeError();
+            errorMessage();
             return;
         }
 
+        //Logueo exitoso
         if(et_user.getText().toString().equals("admin") && et_password.getText().toString().equals("admin")){
+            tipoLogin = 0;
             goMainScreen();
         }else{
             Toast.makeText(this, R.string.wrongUserPass, Toast.LENGTH_LONG).show();
@@ -174,7 +185,8 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void mensajeError(){
+    //Se muestra cuando hay algun campo vacio.
+    public void errorMessage(){
         Toast.makeText(this, R.string.emptyFields, Toast.LENGTH_LONG).show();
     }
 

@@ -51,7 +51,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".SelectedRouteActivity"
+            android:name=".SavedRoutesActivity"
             android:label="@string/title_activity_ruta_seleccionada"></activity>
     </application>
 

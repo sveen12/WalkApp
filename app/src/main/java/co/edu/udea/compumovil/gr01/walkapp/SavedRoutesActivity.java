@@ -10,9 +10,11 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class SelectedRouteActivity extends FragmentActivity implements OnMapReadyCallback {
+public class SavedRoutesActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private double longitud, latitud;
+    private String nombre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,10 @@ public class SelectedRouteActivity extends FragmentActivity implements OnMapRead
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        longitud = getIntent().getExtras().getDouble("longitud");
+        latitud = getIntent().getExtras().getDouble("latitud");
+        nombre = getIntent().getExtras().getString("nombre");
     }
 
 
@@ -34,13 +40,15 @@ public class SelectedRouteActivity extends FragmentActivity implements OnMapRead
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng sitio = new LatLng(longitud, latitud);//Latitud y longitud del lugar
+        mMap.addMarker(new MarkerOptions().position(sitio).title("Marca en " + nombre + "."));//Agrega una marca
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sitio));//Centrar el sitio en la camara
+        mMap.animateCamera(CameraUpdateFactory.zoomIn());
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 1000, null);
     }
 }
