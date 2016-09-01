@@ -5,7 +5,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_login">LoginActivity</string>
     <string name="cancel_login">Se canceló el inicio de sesión</string>
     <string name="error_login">Ocurrió un error al ingresar</string>
     <string name="logout">Cerrar sesión</string>
@@ -17,5 +16,12 @@
     <string name="errorPassword">Debe ingresar una contraseña</string>
     <string name="emptyFields">Ha dejado campos obligatorios vacios.</string>
     <string name="wrongUserPass">Usuario o contraseña incorrectos</string>
-    <string name="title_activity_ruta_seleccionada">Ruta</string>
+    <string name="title_activity_main">Menú principal</string>
+    <string name="title_activity_search_routes">Buscar rutas</string>
+    <string name="title_activity_create_route">Crear ruta</string>
+    <string name="title_activity_show_route">Vizualizador de ruta</string>
+    <string name="title_activity_my_routes">Mis rutas</string>
+    <string name="title_activity_edit_route">Editar ruta</string>
+    <string name="title_activity_create_account">Crear cuenta de usuario</string>
+
 </resources>

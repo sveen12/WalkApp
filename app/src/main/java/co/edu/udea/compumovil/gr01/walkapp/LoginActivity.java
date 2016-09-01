@@ -4,36 +4,21 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Arrays;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private LoginButton loginButton;
+    /*private LoginButton loginButton;
     private CallbackManager callbackManager;
-    private ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;*/
     private EditText et_user;
     private EditText et_password;
-    private int tipoLogin;
+    private int tipoLogin=-1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         et_user = (EditText) findViewById(R.id.et_user);
         et_password = (EditText) findViewById(R.id.et_password);
 
-        //Se inicializa el FacebookSDK
-        FacebookSdk.sdkInitialize(getApplicationContext());
+        /*
         callbackManager =  CallbackManager.Factory.create();
 
         //Acciones a ejecutar cuando se presiona el boton de Facebook
@@ -80,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 //requestUserProfile(loginResult);
                 //Se redirige a la pantalla principal
-                goMainScreen();
+                goMainActivity();
             }
             //En caso de que el logueo se cancele por fallos en la conexion a internet o cerrar la aplicacion
             @Override
@@ -92,11 +76,12 @@ public class LoginActivity extends AppCompatActivity {
             public void onError(FacebookException error) {
                 Toast.makeText(getApplicationContext(), R.string.error_login, Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
     }
 
     //Pide los permisos para acceso a los datos si se logueo con facebook
-    public void loginFacebook(View view){
+
+    /*public void loginFacebook(View view){
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "email"));
     }
 
@@ -142,19 +127,18 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
-    }
+    }*/
 
     //En caso de loguearse correctamente se abre la actividad principal
-    private void goMainScreen() {
-        Intent intent = new Intent(this,MainActivity.class);
+    private void goMainActivity() {
+        Intent intent = new Intent(this, MainMenuActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra("tipoLogin", tipoLogin);
+        //intent.putExtra("tipoLogin", tipoLogin);
         startActivity(intent);
     }
 
     //Login con usuario y cuenta normales
     public void normalLogin(View view) {
-
         if(et_user.getText().toString().equals("")){
             if(et_password.getText().toString().equals("")){
                 et_user.requestFocus();
@@ -178,7 +162,7 @@ public class LoginActivity extends AppCompatActivity {
         //Logueo exitoso
         if(et_user.getText().toString().equals("admin") && et_password.getText().toString().equals("admin")){
             tipoLogin = 0;
-            goMainScreen();
+            goMainActivity();
         }else{
             Toast.makeText(this, R.string.wrongUserPass, Toast.LENGTH_LONG).show();
         }
@@ -191,6 +175,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void createAccount(View view) {
+        Intent intent = new Intent(this, CreateAccountActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     /*//-Para extraer los datos

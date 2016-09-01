@@ -3,41 +3,35 @@
     package="co.edu.udea.compumovil.gr01.walkapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <!--
-         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
-         Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality. 
-    -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
+        android:name=".WalkApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.facebook.FacebookActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
-
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -51,8 +45,27 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".SavedRoutesActivity"
-            android:label="@string/title_activity_ruta_seleccionada"></activity>
+            android:name=".MyRoutesActivity"
+            android:label="@string/title_activity_my_routes" />
+        <activity
+            android:name=".ShowRouteActivity"
+            android:label="@string/title_activity_show_route" />
+        <activity
+            android:name=".CreateRouteActivity"
+            android:label="@string/title_activity_create_route" />
+        <activity
+            android:name=".SearchRoutesActivity"
+            android:label="@string/title_activity_search_routes" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main" />
+        <activity
+            android:name=".EditRouteActivity"
+            android:label="@string/title_activity_edit_route" />
+        <activity
+            android:name=".CreateAccountActivity"
+            android:label="@string/title_activity_create_account" />
+        <activity android:name=".MainMenuActivity"></activity>
     </application>
 
 </manifest>
