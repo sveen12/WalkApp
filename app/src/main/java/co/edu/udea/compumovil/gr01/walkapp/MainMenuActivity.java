@@ -3,6 +3,9 @@ package co.edu.udea.compumovil.gr01.walkapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.facebook.login.LoginManager;
@@ -37,6 +40,29 @@ public class MainMenuActivity extends AppCompatActivity {
         Intent intent = new Intent(this,LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.btnmenu_profile:
+                return true;
+            case R.id.btnmenu_logout:
+                goLoginScreen();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void logout(View view) {

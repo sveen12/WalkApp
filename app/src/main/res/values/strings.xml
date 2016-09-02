@@ -23,5 +23,11 @@
     <string name="title_activity_my_routes">Mis rutas</string>
     <string name="title_activity_edit_route">Editar ruta</string>
     <string name="title_activity_create_account">Crear cuenta de usuario</string>
+    <string name="title_activity_main_menu_nav_draw">MainMenuNavDraw</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 
 </resources>
