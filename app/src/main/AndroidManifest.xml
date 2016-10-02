@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="co.edu.udea.compumovil.gr01.walkapp" >
+    package="co.edu.udea.compumovil.gr01.walkapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -11,20 +11,15 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
         <activity
-            android:name="com.facebook.FacebookActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:name=".activities.LoginActivity"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,32 +40,21 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MyRoutesActivity"
-            android:label="@string/title_activity_my_routes" />
+            android:name=".activities.CreateAccountActivity"
+            android:label="@string/title_activity_create_account"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".ShowRouteActivity"
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".activities.MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".fragments.myroutes.ShowRouteFragment"
             android:label="@string/title_activity_show_route" />
-        <activity
-            android:name=".CreateRouteActivity"
-            android:label="@string/title_activity_create_route" />
-        <activity
-            android:name=".SearchRoutesActivity"
-            android:label="@string/title_activity_search_routes" />
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main" />
-        <activity
-            android:name=".EditRouteActivity"
-            android:label="@string/title_activity_edit_route" />
-        <activity
-            android:name=".CreateAccountActivity"
-            android:label="@string/title_activity_create_account" />
-        <activity android:name=".MainMenuActivity" />
-        <activity
-            android:name=".MainMenuNavDrawActivity"
-            android:label="@string/title_activity_main_menu_nav_draw"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+        <activity android:name=".activities.CreateRouteActivity"></activity>
     </application>
 
 </manifest>

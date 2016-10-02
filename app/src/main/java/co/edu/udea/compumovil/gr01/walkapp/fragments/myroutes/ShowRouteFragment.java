@@ -1,7 +1,12 @@
-package co.edu.udea.compumovil.gr01.walkapp;
+package co.edu.udea.compumovil.gr01.walkapp.fragments.myroutes;
 
-import android.support.v4.app.FragmentActivity;
+
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -10,16 +15,27 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCallback {
+import co.edu.udea.compumovil.gr01.walkapp.R;
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class ShowRouteFragment extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private double longitud, latitud;
     private String nombre;
 
+
+    public ShowRouteFragment() {
+        // Required empty public constructor
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_route);
+        setContentView(R.layout.fragment_show_route);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -30,7 +46,6 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
         nombre = getIntent().getExtras().getString("nombre");
     }
 
-
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -40,7 +55,6 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -51,4 +65,6 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
         mMap.animateCamera(CameraUpdateFactory.zoomIn());
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 1000, null);
     }
+
+
 }

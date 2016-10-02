@@ -16,7 +16,7 @@
     <string name="errorPassword">Debe ingresar una contraseña</string>
     <string name="emptyFields">Ha dejado campos obligatorios vacios.</string>
     <string name="wrongUserPass">Usuario o contraseña incorrectos</string>
-    <string name="title_activity_main">Menú principal</string>
+    <string name="title_activity_main">WalkApp</string>
     <string name="title_activity_search_routes">Buscar rutas</string>
     <string name="title_activity_create_route">Crear ruta</string>
     <string name="title_activity_show_route">Vizualizador de ruta</string>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/it_my_routes"
+            android:icon="@drawable/ic_menu_my_routes"
+            android:title="Mis rutas" />
+        <item
+            android:id="@+id/it_create_routes"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Crear rutas" />
+        <item
+            android:id="@+id/it_search_routes"
+            android:icon="@drawable/ic_menu_search"
+            android:title="Buscar rutas" />
+    </group>
+
+    <item android:title="Sesión">
+        <menu>
+            <item
+                android:id="@+id/it_my_profile"
+                android:icon="@drawable/ic_menu_account"
+                android:title="Mi perfil" />
+            <item
+                android:id="@+id/it_sign_up"
+                android:icon="@drawable/ic_menu_signup"
+                android:title="Cerrar sesión" />
+        </menu>
+    </item>
+
+</menu>

@@ -1,4 +1,4 @@
-package co.edu.udea.compumovil.gr01.walkapp;
+package co.edu.udea.compumovil.gr01.walkapp.fragments.main;
 
 
 import android.os.Bundle;
@@ -7,14 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import co.edu.udea.compumovil.gr01.walkapp.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AutomaticFragment extends Fragment {
+public class CreateRouteFragment extends Fragment {
 
 
-    public AutomaticFragment() {
+    public CreateRouteFragment() {
         // Required empty public constructor
     }
 
@@ -23,7 +24,9 @@ public class AutomaticFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_automatico, container, false);
+        View view = inflater.inflate(R.layout.fragment_create_route, container, false);
+
+        return view;
     }
 
 }

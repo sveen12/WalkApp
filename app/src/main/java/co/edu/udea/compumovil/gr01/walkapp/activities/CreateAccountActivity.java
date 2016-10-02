@@ -1,7 +1,9 @@
-package co.edu.udea.compumovil.gr01.walkapp;
+package co.edu.udea.compumovil.gr01.walkapp.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import co.edu.udea.compumovil.gr01.walkapp.R;
 
 public class CreateAccountActivity extends AppCompatActivity {
 

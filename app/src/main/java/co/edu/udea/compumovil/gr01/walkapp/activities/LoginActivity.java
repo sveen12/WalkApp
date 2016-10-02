@@ -1,4 +1,4 @@
-package co.edu.udea.compumovil.gr01.walkapp;
+package co.edu.udea.compumovil.gr01.walkapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import co.edu.udea.compumovil.gr01.walkapp.R;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -127,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //En caso de loguearse correctamente se abre la actividad principal
     private void goMainActivity() {
-        Intent intent = new Intent(this, MainMenuNavDrawActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         //intent.putExtra("tipoLogin", tipoLogin);
         startActivity(intent);

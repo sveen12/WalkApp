@@ -1,5 +1,6 @@
-package co.edu.udea.compumovil.gr01.walkapp;
+package co.edu.udea.compumovil.gr01.walkapp.activities;
 
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,10 @@ import android.support.v7.widget.Toolbar;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import co.edu.udea.compumovil.gr01.walkapp.R;
+import co.edu.udea.compumovil.gr01.walkapp.fragments.createroute.AutomaticFragment;
+import co.edu.udea.compumovil.gr01.walkapp.fragments.createroute.ManualFragment;
 
 public class CreateRouteActivity extends AppCompatActivity {
 
@@ -33,16 +38,15 @@ public class CreateRouteActivity extends AppCompatActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ManualFragment(), "ONE");
-        adapter.addFragment(new AutomaticFragment(), "TWO");
-        adapter.addFragment(new ManualFragment(), "ONE AGAIN");
+        adapter.addFragment(new AutomaticFragment(), "Automático");
+        adapter.addFragment(new ManualFragment(), "Manual");
         viewPager.setAdapter(adapter);
     }
+
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
