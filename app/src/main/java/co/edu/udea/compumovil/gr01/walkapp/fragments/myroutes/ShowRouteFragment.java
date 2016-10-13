@@ -14,6 +14,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import co.edu.udea.compumovil.gr01.walkapp.R;
 
@@ -59,11 +60,18 @@ public class ShowRouteFragment extends FragmentActivity implements OnMapReadyCal
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        LatLng sitio = new LatLng(longitud, latitud);//Latitud y longitud del lugar
+        LatLng sitio = new LatLng(latitud, longitud);//Latitud y longitud del lugar
         mMap.addMarker(new MarkerOptions().position(sitio).title("Marca en " + nombre + "."));//Agrega una marca
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sitio));//Centrar el sitio en la camara
         mMap.animateCamera(CameraUpdateFactory.zoomIn());
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 1000, null);
+
+        mMap.addPolyline(new PolylineOptions().geodesic(true)
+                .add(new LatLng(latitud, longitud))  // Sydney
+                .add(new LatLng(latitud+1, longitud+1))  // Fiji
+                .add(new LatLng(latitud+2, longitud+2))  // Hawaii
+                .add(new LatLng(latitud+3, longitud+3))  // Mountain View
+        );
     }
 
 

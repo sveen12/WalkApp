@@ -18,7 +18,6 @@ import android.view.MenuItem;
 
 import co.edu.udea.compumovil.gr01.walkapp.R;
 import co.edu.udea.compumovil.gr01.walkapp.fragments.MyProfileFragment;
-import co.edu.udea.compumovil.gr01.walkapp.fragments.main.CreateRouteFragment;
 import co.edu.udea.compumovil.gr01.walkapp.fragments.main.MyRoutesFragment;
 import co.edu.udea.compumovil.gr01.walkapp.fragments.main.SearchRoutesFragment;
 import co.edu.udea.compumovil.gr01.walkapp.fragments.myroutes.ShowRouteFragment;
@@ -161,14 +160,14 @@ public class MainActivity extends AppCompatActivity
         switch (view.getId()){
             //Represa Riogrande
             case R.id.option1:
-                longitud =6.5142779;
-                latitud=-75.4604029;
+                latitud =6.5142779;
+                longitud=-75.4604029;
                 nombre = "Represa Riogrande";
                 break;
             //San Félix
             case R.id.option2:
-                longitud =6.3225976;
-                latitud=-75.5967479;
+                latitud =6.3225976;
+                longitud=-75.5967479;
                 nombre = "San Félix";
                 break;
         }
