@@ -8,16 +8,16 @@ public class Rating {
     private int idroute;
     private String username;
     private int stars;
-    private String comment;
-    private int security;
+    private String comentario;
+    private int seguridad;
 
-    public Rating(int id, int idroute, String username, int stars, String comment, int security) {
+    public Rating(int id, int idroute, String username, int stars, String comentario, int seguridad) {
         this.id = id;
         this.idroute = idroute;
         this.username = username;
         this.stars = stars;
-        this.comment = comment;
-        this.security = security;
+        this.comentario = comentario;
+        this.seguridad = seguridad;
     }
 
     public int getIdroute() {
@@ -36,11 +36,11 @@ public class Rating {
         return stars;
     }
 
-    public String getComment() {
-        return comment;
+    public String getComentario() {
+        return comentario;
     }
 
-    public int getSecurity() {
-        return security;
+    public int getSeguridad() {
+        return seguridad;
     }
 }

@@ -5,13 +5,14 @@ package co.edu.udea.compumovil.gr01.walkapp.data;
  */
 public class Point {
     private int idroute;
-    private int order;
+    private int position;
     private double longitud;
     private double latitud;
 
-    public Point(int idroute, int order, double longitud, double latitud) {
+    public Point(int idroute, int position, double longitud, double latitud) {
         this.idroute = idroute;
-        this.order = order;
+        this.position = position
+        ;
         this.longitud = longitud;
         this.latitud = latitud;
     }
@@ -20,8 +21,8 @@ public class Point {
         return idroute;
     }
 
-    public int getOrder() {
-        return order;
+    public int getPosition() {
+        return position;
     }
 
     public double getLongitud() {

@@ -19,10 +19,10 @@ public class DBHelper extends SQLiteOpenHelper {
             " dificultty TEXT, weather TEXT, howarrive TEXT, " +
             "FOREIGN KEY (username) REFERENCES User(username))";
     public static final String CREATE_POINT = "CREATE TABLE IF NOT EXISTS Point "+
-            "(idroute INTEGER, order INTEGER, longitud REAL, latitud REAL, " +
+            "(idroute INTEGER, position INTEGER, longitud REAL, latitud REAL, " +
             "FOREIGN KEY (idroute) REFERENCES Route(id))";
     public static final String CREATE_RATING = "CREATE TABLE IF NOT EXISTS Rating "+
-            "(id INTEGER, idroute INTEGER, username TEXT, stars INTEGER, comment TEXT, security INTEGER," +
+            "(id INTEGER, idroute INTEGER, username TEXT, stars INTEGER, comentario TEXT, seguridad INTEGER," +
             " FOREIGN KEY (idroute) REFERENCES Route(id)," +
             " FOREIGN KEY (username) REFERENCES User(username))";
 
@@ -139,14 +139,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     // Agrega un punto de una ruta
-    public boolean addPoint(int idroute, int order, double longitud, double latitud){
+    public boolean addPoint(int idroute, int position, double longitud, double latitud){
         SQLiteDatabase db = getWritableDatabase();
         String x = "SELECT * FROM Route WHERE id='"+idroute+"'";
         Cursor c = db.rawQuery(x, null);
         if (c.getCount()==0){
             return false;
         }
-        db.execSQL("INSERT INTO Point (idroute, order, longitud, latitud) values('"+idroute+"','"+order+"','"+longitud+"','"+latitud+"')");
+        db.execSQL("INSERT INTO Point (idroute, position, longitud, latitud) values('"+idroute+"','"+position+"','"+longitud+"','"+latitud+"')");
         c.close();
         return true;
     }
@@ -168,15 +168,15 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //Agrega una calificación a una ruta
-    public boolean addRating(int idroute, String username, int stars, String comment, int security){
+    public boolean addRating(int idroute, String username, int stars, String comentario, int seguridad){
         SQLiteDatabase db = getWritableDatabase();
         String x = "SELECT * FROM Route WHERE id='"+idroute+"'";
         Cursor c = db.rawQuery(x, null);
         if (c.getCount()==0){
             return false;
         }
-        db.execSQL("INSERT INTO Rating (idroute, username, stars, comment, security)" +
-                " values('"+idroute+"','"+username+"','"+stars+"','"+comment+"','"+security+"')");
+        db.execSQL("INSERT INTO Rating (idroute, username, stars, comentario, seguridad)" +
+                " values('"+idroute+"','"+username+"','"+stars+"','"+comentario+"','"+seguridad+"')");
         c.close();
         return true;
     }

@@ -1,5 +1,6 @@
 package co.edu.udea.compumovil.gr01.walkapp.activities;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,6 +39,8 @@ public class CreateAccountActivity extends AppCompatActivity {
                 "foto.jpg"))
         {
                 Toast.makeText(this, "¡Registro exitoso!", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
 
         }else{
                 etUsername.requestFocus();
