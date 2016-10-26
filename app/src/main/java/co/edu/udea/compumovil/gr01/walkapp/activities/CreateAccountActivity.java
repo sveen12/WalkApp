@@ -31,13 +31,13 @@ public class CreateAccountActivity extends AppCompatActivity {
         confirmarCamposVacios();
         confirmacionContrasenas();
 
-        if(dbHelper.registerValidate(
-                etUsername.getText().toString(),
-                etPassword1.getText().toString(),
-                etEmail.getText().toString(),
-                etAge.getText().toString(),
-                "foto.jpg"))
-        {
+        if(dbHelper.registerValidate(etUsername.getText().toString())){
+            dbHelper.createUser(
+                    etUsername.getText().toString(),
+                    etPassword1.getText().toString(),
+                    etEmail.getText().toString(),
+                    etAge.getText().toString(),
+                    "foto.jpg");
                 Toast.makeText(this, "¡Registro exitoso!", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);

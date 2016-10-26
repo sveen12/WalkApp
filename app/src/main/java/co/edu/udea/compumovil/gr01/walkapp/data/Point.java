@@ -5,20 +5,26 @@ package co.edu.udea.compumovil.gr01.walkapp.data;
  */
 public class Point {
     private int idroute;
+    private int tipo;
     private int position;
     private double longitud;
     private double latitud;
 
-    public Point(int idroute, int position, double longitud, double latitud) {
+
+    public Point(int idroute, int tipo, int position, double longitud, double latitud) {
         this.idroute = idroute;
-        this.position = position
-        ;
+        this.tipo = tipo;
+        this.position = position;
         this.longitud = longitud;
         this.latitud = latitud;
     }
 
     public int getIdroute() {
         return idroute;
+    }
+
+    public int getTipo() {
+        return tipo;
     }
 
     public int getPosition() {

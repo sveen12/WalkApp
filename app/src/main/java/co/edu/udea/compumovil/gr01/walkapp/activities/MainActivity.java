@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
@@ -15,19 +16,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import co.edu.udea.compumovil.gr01.walkapp.R;
+import co.edu.udea.compumovil.gr01.walkapp.data.DBHelper;
+import co.edu.udea.compumovil.gr01.walkapp.data.User;
 import co.edu.udea.compumovil.gr01.walkapp.fragments.MyProfileFragment;
+import co.edu.udea.compumovil.gr01.walkapp.fragments.createroute.CreateRouteDialogFragment;
 import co.edu.udea.compumovil.gr01.walkapp.fragments.main.MyRoutesFragment;
 import co.edu.udea.compumovil.gr01.walkapp.fragments.main.SearchRoutesFragment;
 import co.edu.udea.compumovil.gr01.walkapp.fragments.myroutes.ShowRouteFragment;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
     private Fragment fragmentoGenerico;
     private FragmentManager fragmentManager;
     private double longitud, latitud;
     private String nombre;
+    private DBHelper dbHelper = new DBHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,19 +45,32 @@ public class MainActivity extends AppCompatActivity
         fragmentoGenerico = new MyProfileFragment();
         fragmentManager = getSupportFragmentManager();
 
+
+
         updateFragment();
+        /*//Inserciones para pruebas
+        dbHelper.addPointType(1,"Main");
+        dbHelper.addPointType(2,"Wather");
+        dbHelper.addPointType(3,"River");
+        dbHelper.addPointType(4,"Animals");
 
+        dbHelper.addRoute("andres",
+                "Belmira",
+                "sz.png",
+                "Sitio caliente.",
+                3,
+                "Templadin",
+                "Bus desde Medellín");
 
+        dbHelper.addRoute("root",
+                "Donmatias",
+                "dm.png",
+                "Sitio frio e ideal para nadar.",
+                4,
+                "Tropical",
+               "Bus desde Medellín");*/
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
+        //Para la implementación del NavDraw
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -60,22 +79,25 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
     }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+        TextView tvNombreNavHeader = (TextView) findViewById(R.id.tvNombreNavHeader);
+        TextView tvCorreoNavHeader = (TextView) findViewById(R.id.tvCorreoNavHeader);
+        //Agregar imagen
+
+        User usuario = dbHelper.getUser("root");
+        tvNombreNavHeader.setText(usuario.getUsername());
+        tvCorreoNavHeader.setText(usuario.getEmail());
         return true;
     }
 
@@ -86,6 +108,8 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             case R.id.btnmenu_profile:
+                fragmentoGenerico = new MyProfileFragment();
+                updateFragment();
                 return true;
             case R.id.btnmenu_logout:
                 goLoginScreen();
@@ -104,18 +128,20 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.it_my_profile) {
             fragmentoGenerico = new MyProfileFragment();
+
         } else if (id == R.id.it_my_routes) {
             fragmentoGenerico = new MyRoutesFragment();
         } else if (id == R.id.it_create_routes) {
-            Intent intent = new Intent(this,CreateRouteActivity.class);
-            startActivity(intent);
+            DialogFragment dialog = new CreateRouteDialogFragment();
+            dialog.show(getSupportFragmentManager(), "Detalles de la ruta");
+
         } else if (id == R.id.it_search_routes) {
-            fragmentoGenerico = new SearchRoutesFragment();
+            Intent intent = new Intent(this,SearchRoutesActivity.class);
+            startActivity(intent);
         } else if (id == R.id.it_sign_up) {
             goLoginScreen();
         }
         updateFragment();
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -130,7 +156,6 @@ public class MainActivity extends AppCompatActivity
                     .commit();
         }
     }
-
 
     private void goLoginScreen() {
         Intent intent = new Intent(this,LoginActivity.class);
@@ -150,6 +175,7 @@ public class MainActivity extends AppCompatActivity
 
     public void myProfile(MenuItem item) {
         fragmentoGenerico = new MyProfileFragment();
+
         updateFragment();
     }
 
@@ -175,5 +201,15 @@ public class MainActivity extends AppCompatActivity
         intent.putExtra("latitud", latitud);
         intent.putExtra("nombre", nombre);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 }

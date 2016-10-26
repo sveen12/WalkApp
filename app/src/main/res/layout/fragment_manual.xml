@@ -5,9 +5,13 @@
     tools:context=".fragments.createroute.ManualFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <Spinner
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:id="@+id/spnPointType"
+        android:layout_gravity="center_horizontal|bottom"
+        android:gravity="center_vertical"
+        android:background="@android:color/darker_gray"/>
 
 </FrameLayout>

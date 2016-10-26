@@ -4,10 +4,69 @@
     android:layout_height="match_parent"
     tools:context="co.edu.udea.compumovil.gr01.walkapp.fragments.MyProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="My profile" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mi perfil"
+            android:layout_marginTop="20dp"
+            android:id="@+id/textView2"
+            android:textSize="20dp"
+            android:layout_gravity="center_horizontal"
+            android:textStyle="bold" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Usuario"
+                    android:id="@+id/tvUsuarioPerfil"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16dp"
+                    android:layout_gravity="center_horizontal"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Correo"
+                    android:id="@+id/tvCorreoPerfil"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16dp"
+                    android:layout_gravity="center_horizontal"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edad"
+                    android:id="@+id/tvEdadPerfil"
+                    android:textSize="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Foto"
+                    android:id="@+id/tvFotoPerfil"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16dp"
+                    android:layout_gravity="center_horizontal" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
 
 </FrameLayout>

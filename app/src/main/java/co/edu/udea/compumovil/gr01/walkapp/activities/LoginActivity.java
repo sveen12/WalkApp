@@ -29,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     //En caso de loguearse correctamente se abre la actividad principal
     private void goMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("user",et_user.getText().toString());
         startActivity(intent);
     }
 

@@ -27,9 +27,6 @@ public class SearchRoutesFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_routes, container, false);
 
-
-
-
         return view;
     }
 
