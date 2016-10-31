@@ -179,30 +179,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         updateFragment();
     }
 
-
-    public void abrirMapa(View view) {
-        Intent intent = new Intent(this,ShowRouteFragment.class);
-
-        switch (view.getId()){
-            //Represa Riogrande
-            case R.id.option1:
-                latitud =6.5142779;
-                longitud=-75.4604029;
-                nombre = "Represa Riogrande";
-                break;
-            //San Félix
-            case R.id.option2:
-                latitud =6.3225976;
-                longitud=-75.5967479;
-                nombre = "San Félix";
-                break;
-        }
-        intent.putExtra("longitud", longitud);
-        intent.putExtra("latitud", latitud);
-        intent.putExtra("nombre", nombre);
-        startActivity(intent);
-    }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

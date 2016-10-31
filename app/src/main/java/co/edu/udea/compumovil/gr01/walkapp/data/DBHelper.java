@@ -234,8 +234,8 @@ public class DBHelper extends SQLiteOpenHelper {
                         " Route.weather, Route.howarrive  " +
                         "FROM Favorite " +
                 "INNER JOIN Route " +
-                "ON Favorite.idroute = Route.idroute" +
-                        "WHERE Favorite.username='"+username+"'";
+                "ON Favorite.idroute = Route.id" +
+                        " WHERE Favorite.username='"+username+"'";
 
         Cursor ss = db.rawQuery(x, null);
         Route aux = null;
