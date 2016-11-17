@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:id="@+id/buildRouteContainer"
+    tools:context=".activities.BuildRouteActivity">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        android:layout_weight="0.7"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Tipo:"
+            android:ems="10"
+            android:id="@+id/editText2"
+            android:layout_weight="1"
+            android:layout_gravity="end"
+            android:gravity="center"/>
+
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:id="@+id/spnrRouteType" />
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Automático:"
+            android:splitTrack="false"
+            android:id="@+id/spnAutomatic" />
+
+        <Button
+            android:text="Guardar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnSaveRoute"
+            android:onClick="saveRoute"
+            android:layout_weight="2" />
+
+    </LinearLayout>
+
+
+    <fragment
+        android:id="@+id/drawmap"
+        android:layout_width="match_parent"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        map:mapType="satellite"
+        android:layout_height="0dp"
+        android:layout_weight="9.5"/>
+
+
+</LinearLayout>

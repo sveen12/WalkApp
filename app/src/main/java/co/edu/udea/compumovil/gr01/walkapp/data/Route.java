@@ -4,58 +4,76 @@ package co.edu.udea.compumovil.gr01.walkapp.data;
  * Created by saito on 28/08/16.
  */
 public class Route {
-    private int id;
-
-
-
+    private int idroute;
     private String username;
-    private String name;
+    private String nombre;
     private String photourl;
     private String description;
-    private int dificultty;
+    private int difficulty;
     private String weather;
     private String howarrive;
 
-    public Route(int id, String username, String name, String photourl, String description, int dificultty, String weather, String howarrive) {
-        this.id = id;
-        this.username = username;
-        this.name = name;
-        this.photourl = photourl;
-        this.description = description;
-        this.dificultty = dificultty;
-        this.weather = weather;
-        this.howarrive = howarrive;
+    public int getIdroute() {
+        return idroute;
+    }
+
+    public void setIdroute(int idroute) {
+        this.idroute = idroute;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public int getId() {
-        return id;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getPhotourl() {
         return photourl;
     }
 
+    public void setPhotourl(String photourl) {
+        this.photourl = photourl;
+    }
+
     public String getDescription() {
         return description;
     }
 
-    public int getDificultty() {
-        return dificultty;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
     }
 
     public String getWeather() {
         return weather;
     }
 
+    public void setWeather(String weather) {
+        this.weather = weather;
+    }
+
     public String getHowarrive() {
         return howarrive;
+    }
+
+    public void setHowarrive(String howarrive) {
+        this.howarrive = howarrive;
     }
 }

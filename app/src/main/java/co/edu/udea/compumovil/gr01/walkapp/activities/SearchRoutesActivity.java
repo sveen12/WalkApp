@@ -80,11 +80,14 @@ public class SearchRoutesActivity extends AppCompatActivity implements AdapterVi
                 searchView.setIconified(true);
 
                 routes  = dbHelper.searchRoutes(query);
-                Toast.makeText(getApplicationContext(),
-                        String.valueOf(routes.size()) + " resultados encontrados", Toast.LENGTH_SHORT).show();
+                if(routes.size()!=0){
+                    Toast.makeText(getApplicationContext(),
+                            String.valueOf(routes.size()) + " resultados encontrados", Toast.LENGTH_SHORT).show();
 
-                adapter = convertir(routes);
-                mylistview.setAdapter(adapter);
+                    adapter = convertir(routes);
+                    mylistview.setAdapter(adapter);
+                }
+
 
                 return true;
             }
@@ -133,7 +136,7 @@ public class SearchRoutesActivity extends AppCompatActivity implements AdapterVi
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         if(item.getTitle().toString().equals("A favoritos")) {
-            if(dbHelper.addFavoriteRoute(routes.get(selectedItem).getId(),  "root")){
+            if(dbHelper.addFavoriteRoute(routes.get(selectedItem).getIdroute(),  "root")){
                 Toast.makeText(getApplicationContext(), "Ruta añadida a favoritos.", Toast.LENGTH_SHORT).show();
             }else {
                 Toast.makeText(getApplicationContext(), "No se añadio la ruta", Toast.LENGTH_SHORT).show();
@@ -154,9 +157,9 @@ public class SearchRoutesActivity extends AppCompatActivity implements AdapterVi
             rowItems = new ArrayList<RowItem>();
 
             for(int i =0; i<rutas.size();i++){
-                RowItem item = new RowItem( rutas.get(i).getName(),
+                RowItem item = new RowItem( rutas.get(i).getNombre(),
                         rutas.get(i).getUsername(),
-                        getTextDificultty(rutas.get(i).getDificultty()),
+                        getTextDificultty(rutas.get(i).getDifficulty()),
                         rutas.get(i).getWeather(),
                         3) ;
                 rowItems.add(item);

@@ -53,11 +53,11 @@ public class DetailsDialog extends DialogFragment {
                 tvDialogClima = (TextView) view.findViewById(R.id.tvDialogClima);
                 tvDialogComoLlegar = (TextView) view.findViewById(R.id.tvDialogComoLlegar);
 
-        tvDialogNombre.setText(SearchRoutesActivity.routes.get(selectedItem).getName());
+        tvDialogNombre.setText(SearchRoutesActivity.routes.get(selectedItem).getNombre());
         tvDialogUsername.setText("Por: " + SearchRoutesActivity.routes.get(selectedItem).getUsername());
         tvDialogDescripcion.setText("Descripción: " + SearchRoutesActivity.routes.get(selectedItem).getDescription());
         tvDialogDificultad.setText("Dificultad: " + SearchRoutesActivity.getTextDificultty(
-                                            SearchRoutesActivity.routes.get(selectedItem).getDificultty()));
+                                            SearchRoutesActivity.routes.get(selectedItem).getDifficulty()));
         tvDialogClima.setText("Clima: " + SearchRoutesActivity.routes.get(selectedItem).getWeather());
         tvDialogComoLlegar.setText("Cómo llegar: " + SearchRoutesActivity.routes.get(selectedItem).getHowarrive());
 

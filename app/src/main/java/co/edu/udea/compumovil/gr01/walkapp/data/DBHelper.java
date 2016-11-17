@@ -20,7 +20,7 @@ public class DBHelper extends SQLiteOpenHelper {
             "FOREIGN KEY (username) REFERENCES User(username))";
     public static final String CREATE_POINT_TYPE = "CREATE TABLE IF NOT EXISTS PointType "+
             "(idtype INTEGER PRIMARY KEY AUTOINCREMENT, tipo TEXT)" ;
-    public static final String CREATE_POINT = "CREATE TABLE IF NOT EXISTS Point "+
+    public static final String CREATE_POINT = "CREATE TABLE IF NOT EXISTS Points "+
             "(idroute INTEGER, idtype INTEGER, position INTEGER, longitud REAL, latitud REAL, " +
             "FOREIGN KEY (idroute) REFERENCES Route(id)," +
             "FOREIGN KEY (idtype) REFERENCES PointType(idtype))";
@@ -91,7 +91,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         Cursor ss = db.rawQuery("SELECT * FROM User where username='"+user+"'", null);
         if(ss.moveToFirst()){
-            useraux = new User(ss.getString(0),ss.getString(1), ss.getString(2),ss.getString(3),ss.getString(4));
+            //useraux = new User(ss.getString(0),ss.getString(1), ss.getString(2),ss.getString(3),ss.getString(4));
         }
         return useraux;
     }
@@ -135,8 +135,8 @@ public class DBHelper extends SQLiteOpenHelper {
         Route aux = null;
         if(ss.moveToFirst()){
             do{
-                aux = new Route(ss.getInt(0),ss.getString(1),ss.getString(2),ss.getString(3),ss.getString(4),
-                        ss.getInt(5),ss.getString(6),ss.getString(7));
+                //aux = new Route(ss.getInt(0),ss.getString(1),ss.getString(2),ss.getString(3),ss.getString(4),
+                        //ss.getInt(5),ss.getString(6),ss.getString(7));
                 routes.add(aux);
             }while(ss.moveToNext());
         }
@@ -153,8 +153,8 @@ public class DBHelper extends SQLiteOpenHelper {
         Route aux = null;
         if(ss.moveToFirst()){
             do{
-                aux = new Route(ss.getInt(0),ss.getString(1),ss.getString(2),ss.getString(3),ss.getString(4),
-                        ss.getInt(5),ss.getString(6),ss.getString(7));
+               // aux = new Route(ss.getInt(0),ss.getString(1),ss.getString(2),ss.getString(3),ss.getString(4),
+                        //ss.getInt(5),ss.getString(6),ss.getString(7));
                 routes.add(aux);
             }while(ss.moveToNext());
         }
@@ -170,21 +170,21 @@ public class DBHelper extends SQLiteOpenHelper {
         if (c.getCount()==0){
             return false;
         }
-        db.execSQL("INSERT INTO Point (idroute, idtype, position, longitud, latitud) values('"+idroute+"','"+tipo+"','"+position+"','"+longitud+"','"+latitud+"')");
+        db.execSQL("INSERT INTO Points (idroute, idtype, position, longitud, latitud) values('"+idroute+"','"+tipo+"','"+position+"','"+longitud+"','"+latitud+"')");
         c.close();
         return true;
     }
 
     //Devuelve la lista de los puntos de una ruta, con su tipo
     public ArrayList getPoints(String idroute, String tipo){
-        ArrayList <Point> points = new ArrayList<>();
+        ArrayList <Points> points = new ArrayList<>();
         SQLiteDatabase db = getWritableDatabase();
-        String x = "SELECT * FROM Point WHERE idroute='"+idroute+"' AND idtype='"+tipo+"'";
+        String x = "SELECT * FROM Points WHERE idroute='"+idroute+"' AND idtype='"+tipo+"'";
         Cursor ss = db.rawQuery(x, null);
-        Point aux = null;
+        Points aux = null;
         if(ss.moveToFirst()){
             do{
-                aux = new Point(ss.getInt(0),ss.getInt(1),ss.getInt(2), ss.getDouble(3), ss.getDouble(4));
+                //aux = new Points(ss.getInt(0),ss.getInt(1),ss.getInt(2), ss.getDouble(3), ss.getDouble(4));
                 points.add(aux);
             }while(ss.moveToNext());
         }
@@ -214,7 +214,7 @@ public class DBHelper extends SQLiteOpenHelper {
         Rating aux = null;
         if(ss.moveToFirst()){
             do{
-                aux = new Rating(ss.getInt(0),ss.getInt(1), ss.getString(2),ss.getInt(3),ss.getString(4),ss.getInt(5));
+                //aux = new Rating(ss.getInt(0),ss.getInt(1), ss.getString(2),ss.getInt(3),ss.getString(4),ss.getInt(5));
                 ratings.add(aux);
             }while(ss.moveToNext());
         }
@@ -242,8 +242,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
         if(ss.moveToFirst()){
             do{
-                aux = new Route(ss.getInt(0),ss.getString(1),ss.getString(2),ss.getString(3),ss.getString(4),
-                        ss.getInt(5),ss.getString(6),ss.getString(7));
+                //aux = new Route(ss.getInt(0),ss.getString(1),ss.getString(2),ss.getString(3),ss.getString(4),
+                        //ss.getInt(5),ss.getString(6),ss.getString(7));
                 routes.add(aux);
             }while(ss.moveToNext());
         }
@@ -291,6 +291,24 @@ public class DBHelper extends SQLiteOpenHelper {
             }while(ss.moveToNext());
         }
         return types;
+    }
+
+    public int getRouteId(String name){
+        SQLiteDatabase db = getWritableDatabase();
+        String x = "SELECT * FROM Route WHERE name='"+name+"'";
+        Cursor c = db.rawQuery(x, null);
+
+        if(c.moveToFirst()){
+            do{
+                return c.getInt(0);
+            }while(c.moveToNext());
+        }
+        return -1;
+    }
+
+    public void deletePoints(String id) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DELETE FROM Points WHERE idroute='"+id+"'");
     }
 
 

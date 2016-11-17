@@ -23,6 +23,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -54,10 +55,13 @@
         <activity
             android:name=".fragments.myroutes.ShowRouteFragment"
             android:label="@string/title_activity_show_route" />
-        <activity android:name=".activities.CreateRouteActivity"
-            android:label="Creando ruta"/>
-
-        <activity android:name=".activities.SearchRoutesActivity"
-            android:label="Presione la lupa..."></activity>
+        <activity
+            android:name=".activities.CreateRouteActivity"
+            android:label="Creando ruta" />
+        <activity
+            android:name=".activities.SearchRoutesActivity"
+            android:label="Presione la lupa..." />
+        <activity android:name=".activities.BuildRouteActivity"></activity>
     </application>
+
 </manifest>

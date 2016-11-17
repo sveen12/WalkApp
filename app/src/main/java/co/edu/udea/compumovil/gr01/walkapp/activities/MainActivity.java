@@ -1,12 +1,20 @@
 package co.edu.udea.compumovil.gr01.walkapp.activities;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,7 +24,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import co.edu.udea.compumovil.gr01.walkapp.R;
 import co.edu.udea.compumovil.gr01.walkapp.data.DBHelper;
@@ -26,14 +48,18 @@ import co.edu.udea.compumovil.gr01.walkapp.fragments.createroute.CreateRouteDial
 import co.edu.udea.compumovil.gr01.walkapp.fragments.main.MyRoutesFragment;
 import co.edu.udea.compumovil.gr01.walkapp.fragments.main.SearchRoutesFragment;
 import co.edu.udea.compumovil.gr01.walkapp.fragments.myroutes.ShowRouteFragment;
+import co.edu.udea.compumovil.gr01.walkapp.singleton.SessionSingleton;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    public BroadcastReceiver receiver;
     private Fragment fragmentoGenerico;
     private FragmentManager fragmentManager;
-    private double longitud, latitud;
-    private String nombre;
-    private DBHelper dbHelper = new DBHelper(this);
+    private ImageView mImageView;
+    private RequestQueue queue;
+    public static RoundedBitmapDrawable roundedDrawable;
+    TextView tvNombreNavHeader;
+    TextView tvCorreoNavHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +72,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentManager = getSupportFragmentManager();
 
 
+        queue = Volley.newRequestQueue(this);
 
         updateFragment();
         /*//Inserciones para pruebas
-        dbHelper.addPointType(1,"Main");
-        dbHelper.addPointType(2,"Wather");
-        dbHelper.addPointType(3,"River");
-        dbHelper.addPointType(4,"Animals");
+        dbHelper.addPointType(1,"Principal");
+        dbHelper.addPointType(2,"Agua");
+        dbHelper.addPointType(3,"Atractivos");
 
         dbHelper.addRoute("andres",
                 "Belmira",
@@ -80,24 +106,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                boolean respuestaDatos = intent.getBooleanExtra(LoginActivity.DATA_RESULT,false);
+
+                if(respuestaDatos){
+                    tvNombreNavHeader.setText(SessionSingleton.getInstance().getUsername());
+                    tvCorreoNavHeader.setText(SessionSingleton.getInstance().getEmail());
+                    mImageView.setImageDrawable(SessionSingleton.getInstance().getPhoto());
+                }
+            }
+        };
+
 
 
     }
 
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LocalBroadcastManager.getInstance(this).registerReceiver((receiver),
+                new IntentFilter(LoginActivity.DATA_RESULT)
+        );
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
 
-        TextView tvNombreNavHeader = (TextView) findViewById(R.id.tvNombreNavHeader);
-        TextView tvCorreoNavHeader = (TextView) findViewById(R.id.tvCorreoNavHeader);
-        //Agregar imagen
+        tvNombreNavHeader = (TextView) findViewById(R.id.tvNombreNavHeader);
+        tvCorreoNavHeader = (TextView) findViewById(R.id.tvCorreoNavHeader);
+        mImageView = (ImageView) findViewById(R.id.ivProfilePicture);
 
-        User usuario = dbHelper.getUser("root");
-        tvNombreNavHeader.setText(usuario.getUsername());
-        tvCorreoNavHeader.setText(usuario.getEmail());
         return true;
     }
 
@@ -132,9 +175,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.it_my_routes) {
             fragmentoGenerico = new MyRoutesFragment();
         } else if (id == R.id.it_create_routes) {
+
             DialogFragment dialog = new CreateRouteDialogFragment();
             dialog.show(getSupportFragmentManager(), "Detalles de la ruta");
-
+            /*Intent intent = new Intent(this,BuildRouteActivity.class);
+            startActivity(intent)*/
         } else if (id == R.id.it_search_routes) {
             Intent intent = new Intent(this,SearchRoutesActivity.class);
             startActivity(intent);
@@ -188,4 +233,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
+
+
+
+
+
+
 }
