@@ -1,0 +1,18 @@
+{
+  "arrayPuntos":[
+    {
+      	"idRoute":"1",
+    	"orden":"1",
+    	"longitud":"90",
+    	"latitud":"5",
+    	"tipo":"Principal"
+    },
+    {
+      	"idRoute":"1",
+    	"orden":"2",
+    	"longitud":"90",
+    	"latitud":"5",
+    	"tipo":"Principal"
+    }
+  ]
+}
